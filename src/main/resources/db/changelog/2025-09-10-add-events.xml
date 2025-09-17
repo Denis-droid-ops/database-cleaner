@@ -1,0 +1,24 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+          http://www.liquibase.org/xml/ns/dbchangelog
+          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.21.xsd">
+
+    <changeSet id="add-events-table" author="Denis Kuznetsov">
+        <createTable tableName="events">
+            <column name="id" type="bigserial">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamptz">
+                <constraints nullable="false"/>
+            </column>
+            <column name="user_id" type="bigint" />
+            <column name="payload" type="jsonb"/>
+        </createTable>
+
+        <createIndex indexName="idx_events_created_at" tableName="events">
+            <column name="created_at"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
